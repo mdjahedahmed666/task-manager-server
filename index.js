@@ -33,7 +33,7 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     // await client.connect();
     const userCollection = client.db("taskDB").collection("users");
-    const productCollection = client.db("taskDB").collection("allProducts");
+    const taskCollection = client.db("taskDB").collection("tasks");
 
     // app.get("/allProducts", async (req, res) => {
     //   const cursor = productCollection.find();
@@ -51,6 +51,11 @@ async function run() {
     app.post("/users", async (req, res) => {
         const newUser = req.body;
         const result = await userCollection.insertOne(newUser);
+        res.send(result);
+      });
+    app.post("/tasks", async (req, res) => {
+        const newTask = req.body;
+        const result = await taskCollection.insertOne(newTask);
         res.send(result);
       });
 
